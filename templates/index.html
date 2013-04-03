@@ -1,0 +1,226 @@
+{% load bootstrap %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    {% bootstrap_css %}
+    <script src="/static/jquery-1.7.2.min.js"></script>
+    <script>
+        $.classList = [];
+        id = {{ idStart }};
+    </script>
+    {% bootstrap_custom_less "lib/bootstrap.less" %}
+    <link rel="stylesheet" type="text/css" href="static/js/fullcalendar/fullcalendar.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/popbox.css"/>
+    <script type="text/javascript" src='/static/js/fullcalendar/fullcalendar.js'></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}js/javascript.js'></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}js/popbox.js'></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}js/qtip.js'></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}js/csspopup.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            {{ events|safe }}
+        });
+    </script>
+    <title>Tufts Scheduler</title>
+</head>
+
+<body>
+<div id="blanket" style="display:none;"></div>
+<div class="topbar">
+    <div class="fill">
+        <div class="container">
+            <h3 class="brand">Tufts Scheduler</h3>
+            <div class="nav-collapse">
+            <p class="navbar-text pull-right registerLink">
+                {% if user.is_authenticated %}
+                    <span id="welcome">Logged in as {{ user.username.capitalize }}</span> <a  href="/logout">Log out</a>
+                {% else %}
+                <div id="notLoggedIn">
+                    <div class='popbox'>
+                        <a class='open' href='#'>Register</a>
+
+                        <div class='collapse'>
+                            <div class='box'>
+                                <div class='arrow'></div>
+                                <div class='arrow-border'></div>
+                                <div id="regForm">
+                                    <label class="regLabel">Username: 
+                                        <span class="regError" id="userError">Username already exists</span>
+                                        <span class="regError" id="blankUserError">Please enter a username</span>
+                                    </label>
+                                        <input type="text" id="username" />
+                                    
+                                    <label class="regLabel">Email:
+                                        <span class="regError" id="emailError">Email already exists</span>
+                                        <span class="regError" id="blankEmailError">Please enter an email</span>
+                                        <span class="regError" id="validEmailError">Please enter a valid email</span>
+                                    </label>
+                                        <input type="text" id="email" />
+                                        
+                                    <label class="regLabel">Password: 
+                                        <span class="regError" id="passError">Passwords don't match</span>
+                                        <span class="regError" id="blankPassError">Please enter a password</span>
+                                    </label>
+                                        <input type="password" id="pass1" />
+                                    <label class="regLabel">Repeat Password: </label>
+                                        <input type="password" id="pass2" /><br /><br />
+                                    
+                                    <a href="#" class="closepopup">Cancel</a>
+                                    <a href="#" id="register" onclick="register()">Register</a>
+                                </div>
+                                <div id="regSuccess">
+                                    <p id="successP">Thank you for regsitering.<br />You can now log in</p>
+                                    <a href="#" class="closepopup">Close</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='popbox'>
+                        <a class='open' href='#'>Sign In</a>
+
+                        <div class='collapse'>
+                            <div class='box'>
+                                <div class='arrow'></div>
+                                <div class='arrow-border'></div>
+                                <span class="regError" id="loginError">Incorrect Username or Password</span>
+                                <label class="regLabel">Username: </label>
+                                    <input type="text" id="loginUser" />
+                                <label class="regLabel">Password: </label>
+                                    <input type="password" id="loginPass" /><br /><br />
+                                
+                                <a href="#" class="closepopup">Cancel</a>
+                                <a href="#" id="register" onclick="login()" tabIndex=1>Login</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="span7">
+        <div class="hero-unit" id="leftHolder">
+            <button class="btn btn-danger stepBtn" data-toggle="collapse" data-target="#persEvent" 
+                onclick="slideTabs(1)">
+                Step 1: Personal Events
+            </button>
+
+            <div id="persEvent" class="collapse in" >
+                <h3>To add a personal event to the calendar click and drag in the timeslot and enter a title</h3>
+            </div>
+
+            <button class="btn btn-danger stepBtn"  data-toggle="collapse" data-target="#addClasses" 
+                onclick="slideTabs(2)">
+                Step 2: Add Classes
+            </button>
+            <div id="addClasses" class="collapse in" style="display:none">
+                <h3>Select the department:</h3>
+                <form action="">
+                    {{ departments}}
+                <h3>Select the class:</h3>
+                <select name="class" id="id_course">
+                </select>
+                <form action="">
+                    <input class="btn primary" id="addClass" type="button" value="Add Class">
+                </form>   
+                <div id="Class List">
+                    <h2>List of Classes:<span id="removeHead">Remove</span></h2>
+                    <ul id="class_list">
+                        {{ classes|safe }}
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn btn-danger stepBtn" id="setPreferences" data-toggle="collapse" data-target="#prefs"
+                onClick="slideTabs(3)">
+                    Step 3: Set Preferences
+            </button>
+            <div id="prefs" class="collapse in" style="display:none">
+                <h4>Class List:</h4>
+                    <ul id="class_list_pref">
+                        {{ classPrefs|safe }}
+                    </ul>
+                <h4>Try to Avoid:</h4>
+                    <ul id="prefList">
+                        <li><input type="checkbox" id="monPref" onClick="savePref()" {% if prefs.monPref == "true" %}checked {% endif %}/> Monday Classes</li>
+                        <li><input type="checkbox" id="tuesPref" onClick="savePref()" {% if prefs.tuesPref == "true" %}checked {% endif %}/> Tuesday Classes</li>
+                        <li><input type="checkbox" id="wednPref" onClick="savePref()" {% if prefs.wednPref == "true" %}checked {% endif %}/> Wednesday Classes</li>
+                        <li><input type="checkbox" id="thursPref" onClick="savePref()" {% if prefs.thursPref == "true" %}checked {% endif %}/> Thursday Classes</li>
+                        <li><input type="checkbox" id="friPref" onClick="savePref()" {% if prefs.friPref == "true" %}checked {% endif %}/> Friday Classes</li>
+                        <li><input type="checkbox" id="beforePref" onClick="savePref()" {% if prefs.beforePref == "true" %}checked {% endif %}/> Classes before 
+                            <select onChange="savePref()" class="selectPref" id="beforeSelect">
+                                {{ beforeOptions|safe }}
+                            </select></li>
+                        <li><input type="checkbox" id="afterPref" onClick="savePref()" {% if prefs.afterPref == "true" %}checked {% endif %}/> Classes after 
+                            <select onChange="savePref()" class="selectPref" id="afterSelect">
+                                {{ afterOptions|safe }}
+                            </select></li>
+                        <li><input type="checkbox" id="betweenPref" onClick="savePref()" {% if prefs.betweenPref == "true" %}checked {% endif %}/> Classes between 
+                            <select onChange="savePref()" class="selectPref" id="betweenStartSelect">
+                                {{ betweenStartOptions|safe }}
+                            </select>
+                            and 
+                            <select onChange="savePref()" class="selectPref" id="betweenEndSelect">
+                                {{ betweenEndOptions|safe }}
+                            </select></li>
+                    </ul>
+                <div id="popUpDiv" style="display:none;">
+                    <div id="popUpContent"></div>
+                    <a href="#" onclick="popup('popUpDiv')">X</a>
+                </div>
+                
+            </div>
+            <div id="schedulePopupDiv" style="display:none;">
+                <div id="schedulePopupContent">
+                    <div id="tabbed_box_1" class="tabbed_box">
+                        <div class="tabbed_area" id="contentList">  
+                            <ul class="tabs" id="tabList"></ul>
+                        </div>  
+                    </div> 
+                </div>
+                <a href="#" onclick="popup('schedulePopupDiv')">X</a>
+            </div>
+            <button class="btn btn-danger stepBtn" id="createSched" 
+                onClick="slideTabs(4);create();"
+            >Step 4: Create Schedule</button>
+            <button class="btn btn-danger stepBtn" id="addToSched" data-toggle="collapse" data-target="#addClassesToSched"
+                onClick="slideTabs(5)"
+            >Step 5: Add to Schedule</button>
+            <div id="addClassesToSched" class="collapse in" style="display:none">
+                <div id="classesSearch">
+                    <label>Department: </label><br />
+                    <select id="step5ClassDropDown">
+                        {{ depdropdown|safe }}
+                    </select>
+                    <br />
+                    <label>Class Quick Search</label><br />
+                    <input type="text" id="classSearch" /> <input type="button" value="Search" id="searchButton" onClick="searchClasses()" />
+                    <br /><br />
+                </div>
+                <div id="classesListDiv">
+                    <ul id="classesList">
+                        {{ classdropdown|safe }}
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-danger stepBtn" id="addToSched"
+                onClick="slideTabs(6);printSched();"
+            >Step 6: Print Schedule</button>
+            </ul>
+            </div>
+        </div>
+        <div class="span13" id="rightHolder"><div id="calendar" style="margin-top:60px"></div></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

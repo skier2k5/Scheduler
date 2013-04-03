@@ -1,0 +1,26 @@
+{% load bootstrap %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    {% bootstrap_css %}
+    <script src="/static/jquery-1.7.2.min.js"></script>
+    <script>
+       $.classList = [];
+    </script>
+    {% bootstrap_custom_less "lib/bootstrap.less" %}
+    <link rel="stylesheet" type="text/css" href="static/js/fullcalendar/fullcalendar.css"/>
+	<link rel="stylesheet" type="text/css" href="static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/popbox.css"/>
+	<script type="text/javascript" src='{{ STATIC_URL }}js/javascript.js'></script>
+
+    <title>Tufts Scheduler</title>
+</head>
+
+<body>
+<form action="" method="post">
+	{{ regForm.as_p }}
+</form>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+#register {
+    float: right;
+    margin-right: 10px;
+    color: red;
+}
+
+.regLabel {
+    text-align: left;
+    margin-left: 10px;
+    width: 225px;
+}
+
+.topbar input {
+    color: black;
+}
+
+.topbar input:hover {
+    color: black;
+}
+
+.regError {
+    color: red;
+    display: none;
+}
+
+#regSuccess {
+    display: none;
+}
+
+#successP {
+    font-size: 16px;
+}
+
+#welcome {
+    color: white;
+    margin-right: 10px;
+}
+
+#peInfoPopup {
+    display:block;
+    background:#FFF;
+    border:solid 1px #BBBBBB;
+    border-radius:5px;
+    box-shadow:0px 0px 15px #999;
+    position:absolute;
+    width: 250px;
+}
+
+#peInfo {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 100px;
+    left: 100px;
+}
+
+.removeLink {
+    color: white;
+}
+
+.removeLink:hover {
+    color: white;
+}
+
+.classRemove {
+    float: right;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+#removeHead {
+    font-size: 12px;
+    font-weight: normal;
+    position: relative;
+    left: 20px;
+    float: right;
+}
+
+#class_list_pref a, #class_list a, .removeLink {
+    cursor: hand;
+    cursor: pointer;
+}
+
+#class_list li {
+    width: 250px;
+}
+
+.stepBtn {
+    width: 280px;
+    font-size: 16px;
+}
+
+#step5ClassDropDown {
+    width: 220px;
+}
+
+.classInfoButton {
+    color: black;
+}
+
+#searchButton {
+    color: black;
+}
+
+#blanket {
+    background-color:#111;
+    opacity: 0.65;
+    filter:alpha(opacity=65);
+    position:absolute;
+    z-index: 9001;
+    top:0px;
+    left:0px;
+    width:100%;
+}
+
+#backButton {
+    float: right;
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid;
+    font-size: 18px;
+}
+
+#leftHolder {
+    height: 557px;
+}
+
+#courseInfoOutter {
+    background-color: #f5f5f5;
+    width: 100%;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#courseInfoContent {
+    background-color: white;
+    margin: 5px;
+    overflow:scroll;
+}
+
+#classesList {
+    height: 300px;
+    width: 280px;
+    background-color: white;
+    margin-left: 0px;
+    overflow-y: scroll;
+}
+
+#classesList li {
+    height: 20px;
+    border: 1px solid gray;
+    overflow: hidden;
+}
+
+#classesList li:hover {
+    background-color: #EEE;
+    cursor: pointer;
+}
+
+#selectSchedButton {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 45px;
+    width: 155px;
+    background-color: brown;
+    color: white;
+}
+
+#popUpDiv {
+    position:absolute;
+    background-color:#eeeeee;
+    width:760px;
+    top: -95px;
+    left: 360px;
+    z-index: 9002;
+}
+
+#schedulePopupDiv {
+    position:absolute;
+    background-color:#eeeeee;
+    width:760px;
+    top: 44px;
+    left: 425px;
+    z-index: 9002;
+}
+
+#cal{
+    width:600px;
+}
+
+#schedCal1, #schedCal2, #schedCal3, #schedCal4, #schedCal5{
+    width:600px;
+    display: none;
+}
+
+.profPrefSelect {
+    float: right;
+}
+
+.selectPref {
+    width:90px;
+}
+
+#tabbed_box {  
+    margin: 0px auto 0px auto;  
+    width:300px;  
+}
+
+.tabbed_box h4 {  
+    font-family:Arial, Helvetica, sans-serif;  
+    font-size:23px;  
+    color:#ffffff;  
+    letter-spacing:-1px;  
+    margin-bottom:10px;  
+}
+
+.tabbed_box h4 small {  
+    color:#e3e9ec;  
+    font-weight:normal;  
+    font-size:9px;  
+    font-family:Verdana, Arial, Helvetica, sans-serif;  
+    text-transform:uppercase;  
+    position:relative;  
+    top:-4px;  
+    left:6px;  
+    letter-spacing:0px;  
+}
+
+.tabbed_area {
+    padding:8px;  
+}
+
+ul.tabs {  
+    margin:0px; padding:0px;  
+}  
+ul.tabs li {  
+    list-style:none;  
+    display:inline;  
+}  
+
+ul.tabs li a {  
+    background-color:#464c54;  
+    color:#ffebb5;  
+    padding:8px 14px 8px 14px;  
+    text-decoration:none;  
+    font-size:9px;  
+    font-family:Verdana, Arial, Helvetica, sans-serif;  
+    font-weight:bold;  
+    text-transform:uppercase;  
+    border:1px solid #464c54;  
+}  
+ul.tabs li a:hover {  
+    background-color:#2f343a;  
+    border-color:#2f343a;  
+}  
+ul.tabs li a.active {  
+    background-color:#ffffff;  
+    color:#282e32;  
+    border:1px solid #464c54;  
+    border-bottom: 1px solid #ffffff;  
+} 
+
+.content {  
+    background-color:#ffffff;  
+    padding:10px;  
+    border:1px solid #464c54;  
+}  
+#content_2, #content_3, #content_4, #content_5 { display:none; } 
+
+ul.tabs {  
+    margin:0px; padding:0px;  
+    margin-top:5px;  
+    margin-bottom:-1px;  
+}  
+
+.content ul {  
+    margin:0px;  
+    padding:0px 20px 0px 20px;  
+}  
+.content ul li {  
+    list-style:none;  
+    border-bottom:1px solid #d6dde0;  
+    padding-top:15px;  
+    padding-bottom:15px;  
+    font-size:13px;  
+}  
+.content ul li a {  
+    text-decoration:none;  
+    color:#3e4346;  
+}  
+.content ul li a small {  
+    color:#8b959c;  
+    font-size:9px;  
+    text-transform:uppercase;  
+    font-family:Verdana, Arial, Helvetica, sans-serif;  
+    position:relative;  
+    left:4px;  
+    top:0px;  
+} 
+
+.content ul li:last-child {  
+    border-bottom:none;  
+} 

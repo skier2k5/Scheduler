@@ -1,0 +1,35 @@
+{% load bootstrap %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    {% bootstrap_css %}
+    <script src="/static/jquery-1.7.2.min.js"></script>
+    {% bootstrap_custom_less "lib/bootstrap.less" %}
+    <link rel="stylesheet" type="text/css" href="/static/js/fullcalendar/fullcalendar.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/printsched.css"/>
+    <script type="text/javascript" src='/static/js/fullcalendar/fullcalendar.js'></script>
+    <script type="text/javascript" src='/static/js/printsched.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            {{ events|safe }}
+        });
+    </script>
+    <title>Tufts Scheduler</title>
+</head>
+<body>
+    <div id="calendar" style="margin-top:60px"></div>
+    <table id="schedule">
+        <tr>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            <th>Call Number</th>
+            <th>Teacher</th>
+            <th>Location</th>
+            <th>Days</th>
+            <th>Times</th>
+        </tr>
+        {{ rows|safe }}
+    </table>
+</body>
+</html>

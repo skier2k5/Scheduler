@@ -1,0 +1,16 @@
+#calendar {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden!important;
+}
+
+#schedule {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    font-size: .9em;
+}
